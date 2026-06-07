@@ -5,3 +5,6 @@ __pycache__/
 *.log
 outputs/
 data/raw/
+personal_notes.txt
+requirements.txt
+README.md
