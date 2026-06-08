@@ -91,3 +91,18 @@ Filas: 71  |  Columnas: 2
 product_category_name           str      71
 product_category_name_english   str      71
 Sin nulos.
+
+-- REPORTE DE DIAGNÓSTICO CON ML Random Forest
+Se excluyeron categorías por muestras insuficientes (<5)
+Categorías incluidas en diagnóstico : 70
+Productos en entrenamiento          : 32,334
+
+RESULTADOS (promedio de 5 folds):
+Accuracy: 34.3% ± 0.1% (baseline: 9.4%)
+F1-macro: 22.9% ± 0.4% (baseline: 1.4%)
+
+IMPORTANCIA DE CADA MÉTRICA:
+product_weight_g             31.8%
+product_length_cm            23.1%
+product_height_cm            23.0%
+product_width_cm             22.1%
