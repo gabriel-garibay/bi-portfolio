@@ -106,3 +106,6 @@ product_weight_g             31.8%
 product_length_cm            23.1%
 product_height_cm            23.0%
 product_width_cm             22.1%
+
+LARGO MÁXIMO DE ZIP_CODE_PREFIX PARA ESTANDARIZAR
+El largo máximo de zip_code_prefix es: 5

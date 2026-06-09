@@ -70,6 +70,16 @@ def main() -> None:
             print(f"\nADVERTENCIA: no se encontró {archivo}")
 
 
+# Capturar largo estándar del código zip_code_prefix
+def explore_len() -> None:
+    geolocation = pd.read_csv(path_raw / "olist_geolocation_dataset.csv")
+    # customer = pd.read_csv(path_raw / "olist_customers_dataset.csv")
+    order_items = pd.read_csv(path_raw / "olist_order_items_dataset.csv")
+    max_len_zip = geolocation["geolocation_zip_code_prefix"].astype(str).str.len().max()
+    print(f"El largo máximo de zip_code_prefix es: {max_len_zip}")
+    print(order_items.sort_values("freight_value"))
+
+
 # Diagnóstico acerca de las medidas físicas como discrimante para categoría de producto
 # Método: Random Forest como clasificador diagnóstico + cross-validation estratificada
 def ml_products() -> None:
@@ -153,4 +163,5 @@ def ml_products() -> None:
 # Ejecución directa: python scripts/01_explore.py
 if __name__ == "__main__":
     # main()
-    ml_products()
+    # ml_products()
+    explore_len()

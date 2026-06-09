@@ -11,3 +11,7 @@
         Accuracy=34.3%, F1-macro=22.9%.
     Aunque el modelo supera el baseline aleatorio (F1 1.4%), un 65% de error en la asignación hace la imputación no confiable para uso analítico.
         Los 610 productos sin categoría se etiquetan como "sin_categoria".
+
+# clean_01
+    Funciones para cambio de datos realizadas, previa exploración de longitudes de datos numéricos y categorización de cadenas de texto.
+    
