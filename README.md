@@ -13,5 +13,14 @@
         Los 610 productos sin categoría se etiquetan como "sin_categoria".
 
 # clean_01
-    Funciones para cambio de datos realizadas, previa exploración de longitudes de datos numéricos y categorización de cadenas de texto.
+    Funciones para limpieza por tabla:
+        zip_code_prefix: código postal fijado en 5 digitos (código más largo)
+        Eliminación de duplicados de Geolocation. (Filas: 1,000,163 → 738,332)
+        Normalización de strings para consistencias de joins.
+        Rellenado de blancos con mediana (para las medidas físicas de los productos)
+    Verificación ejecutada sobre DataFrames en memoria antes de guardar
+    Csv en /clean listos para cargarse, se deja el casteo para el DDL en SQL.
+    
+
+
     

@@ -73,11 +73,20 @@ def main() -> None:
 # Capturar largo estándar del código zip_code_prefix
 def explore_len() -> None:
     geolocation = pd.read_csv(path_raw / "olist_geolocation_dataset.csv")
-    # customer = pd.read_csv(path_raw / "olist_customers_dataset.csv")
+    products = pd.read_csv(path_raw / "olist_products_dataset.csv")
     order_items = pd.read_csv(path_raw / "olist_order_items_dataset.csv")
+    payments = pd.read_csv(path_raw / "olist_order_payments_dataset.csv")
+    reviews = pd.read_csv(path_raw / "olist_order_reviews_dataset.csv")
+    orders = pd.read_csv(path_raw / "olist_orders_dataset.csv")
+    sellers = pd.read_csv(path_raw / "olist_sellers_dataset.csv")
+    translations = pd.read_csv(path_raw / "product_category_name_translation.csv")
+    # customer = pd.read_csv(path_raw / "olist_customers_dataset.csv")
+    # Verificar longitud máxima del zip_code
     max_len_zip = geolocation["geolocation_zip_code_prefix"].astype(str).str.len().max()
     print(f"El largo máximo de zip_code_prefix es: {max_len_zip}")
-    print(order_items.sort_values("freight_value"))
+    # Verificar que los productos sin dimensiones físicas aparecen en Order Items
+    sin_medidas = products[products["product_weight_g"].isnull()]
+    print(sin_medidas["product_id"].isin(order_items["product_id"]))
 
 
 # Diagnóstico acerca de las medidas físicas como discrimante para categoría de producto
