@@ -18,9 +18,19 @@
         Eliminación de duplicados de Geolocation. (Filas: 1,000,163 → 738,332)
         Normalización de strings para consistencias de joins.
         Rellenado de blancos con mediana (para las medidas físicas de los productos)
-    Verificación ejecutada sobre DataFrames en memoria antes de guardar
+    Verificación ejecutada sobre DataFrames en memoria antes de guardar (nulos, tipo, longitud, etc.)
     Csv en /clean listos para cargarse, se deja el casteo para el DDL en SQL.
     
-
-
-    
+# load_01
+    Esquema estrella definido en sql/ddl.sql y ejecutado contra PostgreSQL (de-portfolio) desde Python via psycopg2.
+    Tipos de dato definidos directamente en el DDL (con base en el reporte clean_02.txt)
+    9 tablas creadas:
+        Dimensiones: dim_date, dim_customer, dim_seller, dim_product, dim_order
+        Hechos: fact_order_items, fact_payments, fact_reviews
+        Soporte: geolocation (múltiples coordenadas por zip_code, colapsar lat/lng perdería precisión geoespacial necesaria para mapas de calor en Power BI)
+    Decisiones de diseño:
+        dim_date generada en PostgreSQL (2016–2018 completos) para mantener el modelo autocontenido en la capa de datos.
+        dim_product usará nombres de categoría en inglés, obtenidos por join con product_category_name_translation.csv al cargar.
+        order_purchase_date (DATE) se usa como FK a dim_date. order_purchase_timestamp (TIMESTAMP) se conserva en dim_order para evitar errores en cálculos de tiempo de entrega cuando la aprobación cruza medianoche.
+    ![Star schema diagram](images/schema_diagram.png)
+    * Cambio de esquema de public a core.

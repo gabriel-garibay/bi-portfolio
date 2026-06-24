@@ -87,6 +87,27 @@ def explore_len() -> None:
     # Verificar que los productos sin dimensiones físicas aparecen en Order Items
     sin_medidas = products[products["product_weight_g"].isnull()]
     print(sin_medidas["product_id"].isin(order_items["product_id"]))
+    # Verificar varias reviews por order, y diferentes score
+    print(reviews.groupby("order_id").size().value_counts())
+    dupes = reviews[reviews.groupby("order_id")["order_id"].transform("count") > 1]
+    print(dupes.groupby("order_id")["review_score"].nunique().value_counts())
+    # Revisión de rango de fechas para DDL
+    date_cols = [
+        "order_purchase_timestamp",
+        "order_approved_at",
+        "order_delivered_carrier_date",
+        "order_delivered_customer_date",
+        # "order_estimated_delivery_date",
+    ]
+    min_date = orders["order_purchase_timestamp"].min()
+    max_date = orders["order_purchase_timestamp"].max()
+
+    for col in date_cols:
+        min_date = min(min_date, orders[col].min())
+        max_date = max(max_date, orders[col].max())
+    # print(f"{min_date} → {max_date}")
+    # print(orders[date_cols])
+    print(reviews)
 
 
 # Diagnóstico acerca de las medidas físicas como discrimante para categoría de producto

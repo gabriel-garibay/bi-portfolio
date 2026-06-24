@@ -154,11 +154,20 @@ def ver_limpios(nombre: str, df: pd.DataFrame) -> None:
 
     nulos = df.isnull().sum()
     nulos_pct = (nulos / len(df) * 100).round(2)
+    long_max = df.apply(
+        lambda col: (
+            col.max()
+            if pd.api.types.is_numeric_dtype(col)
+            else col.astype(str).str.len().max()
+        ).astype(int)
+    )
     reporte = pd.DataFrame(
         {
             "nulos": nulos,
             "pct_nulos": nulos_pct,
             "unicos": df.nunique(),
+            "dtype": df.dtypes,
+            "long/max": long_max,
         }
     )
     if reporte["nulos"].sum() > 0:
