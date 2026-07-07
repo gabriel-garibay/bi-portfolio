@@ -1,37 +1,66 @@
-# PIPELINE E-COMMERCE
-## exploration_01
-    Se observan tablas con cantidades aceptables de nulos considerando el nombre de campo o columna; sin embargo, nulos significativos en una tabla de dimensión (PRODUCTS) requieren análisis extra.
-        610 nulos en product_category_name
-        2 nulos en campos de métricas (weight, length, height, width)
-    También, 1 M de filas en GEOLOCATION se requieren revisar por potenciales duplicados
-        Filas: 1,000,163
-        geolocation_zip_code_prefix: 19015 únicos
-        
-## exploration_02
-    Se evaluó la separabilidad de product_category_name mediante las métricas físicas (weight, length, height, width) usando Random Forest como diagnóstico de separabilidad (70 categorías, n=32334, StratifiedKFold k=5, class_weight=balanced).
-        Accuracy=34.3%, F1-macro=22.9%.
-    Aunque el modelo supera el baseline aleatorio (F1 1.4%), un 65% de error en la asignación hace la imputación no confiable para uso analítico.
-        Los 610 productos sin categoría se etiquetan como "sin_categoria".
+# P01: E-Commerce Analytics Pipeline (Olist & FX)
+### 🚀 Moving from BI Analyst to Analytics Engineer
+A production-inspired, end-to-end data platform built to replicate modern Analytics Engineering workflows. This project models and transforms raw Brazilian e-commerce transaction data (Olist) and dynamic macroeconomic factors, implementing a robust **Medallion Architecture (Bronze -> Silver -> Gold)** in PostgreSQL using Python and **dbt Core**, finalizando con reportería avanzada en **Power BI**.
 
-## clean_01
-    Funciones para limpieza por tabla:
-        zip_code_prefix: código postal fijado en 5 digitos (código más largo)
-        Eliminación de duplicados de Geolocation. (Filas: 1,000,163 → 738,332)
-        Normalización de strings para consistencias de joins.
-        Rellenado de blancos con mediana (para las medidas físicas de los productos)
-    Verificación ejecutada sobre DataFrames en memoria antes de guardar (nulos, tipo, longitud, etc.)
-    Csv en /clean listos para cargarse, se deja el casteo para el DDL en SQL.
-    
-## load_01
-    Esquema estrella definido en sql/ddl.sql y ejecutado contra PostgreSQL (de-portfolio) desde Python via psycopg2.
-    Tipos de dato definidos directamente en el DDL (con base en el reporte clean_02.txt)
-    9 tablas creadas:
-        Dimensiones: dim_date, dim_customer, dim_seller, dim_product, dim_order
-        Hechos: fact_order_items, fact_payments, fact_reviews
-        Soporte: geolocation (múltiples coordenadas por zip_code, colapsar lat/lng perdería precisión geoespacial necesaria para mapas de calor en Power BI)
-    Decisiones de diseño:
-        dim_date generada en PostgreSQL (2016–2018 completos) para mantener el modelo autocontenido en la capa de datos.
-        dim_product usará nombres de categoría en inglés, obtenidos por join con product_category_name_translation.csv al cargar.
-        order_purchase_date (DATE) se usa como FK a dim_date. order_purchase_timestamp (TIMESTAMP) se conserva en dim_order para evitar errores en cálculos de tiempo de entrega cuando la aprobación cruza medianoche.
-![Star schema diagram](images/schema_diagram.png)
-* Cambio de esquema de public a core.
+> **Data-Driven Engineering:** Every architecture decision—from composite PK selection to hash-based deduplication—is empirically verified through data exploration reports rather than structural assumptions.
+
+---
+
+## Data Architecture Workflow
+* **[Raw Sources]** -> 9 Olist CSVs + Frankfurter API (BRL/EUR rates)
+* **[Layer 1: Bronze]** -> PostgreSQL Target (Immutable Raw TEXT Mirror)
+* **[Layer 2: Silver]** -> dbt Core Staging (Type Casting, Cleansing & Deduplication)
+* **[Layer 3: Gold]** -> dbt Core Marts (Analytical Dimensions & Facts)
+* **[BI Layer]** -> Power BI (Star Schema / Advanced DAX Time Intelligence)
+
+---
+
+## Tech Stack
+* **Orchestration & Ingestion:** Python (`psycopg2`, `requests`, `FastAPI` *planned*)
+* **Storage & Compute:** PostgreSQL 16+
+* **Transformation & T-Modeling:** dbt Core (v1.8+)
+* **Visualization & Analytics:** Power BI (Star Schema / Advanced DAX)
+* **Version Control:** Git & GitHub
+
+---
+
+## Ingestion Pipeline Scripts (`/scripts`)
+
+The ingestion layer is schema-agnostic, reusable, and designed with high modularity:
+
+| Script | Purpose |
+| :--- | :--- |
+| `01_raw_explore.py` | **Pre-load profiling:** Evaluates PK candidates, duplicate thresholds, and null rates across 9 raw CSVs. |
+| `02_bronze_ddl.py` | **Infrastructure Setup:** Executes DDL to build the strict `bronze` schema architecture. |
+| `03_bronze_load_olist.py` | **Idempotent Ingestion:** Loads e-commerce datasets into Bronze using `ON CONFLICT` and synthetic hashing. |
+| `03_bronze_load_exchange.py` | **API Integration:** Fetches `BRL/EUR` rates dynamically based on the transaction boundaries found in the data. |
+| `04_bronze_explore.py` | **Post-load Quality Gate:** Validates row counts, detects foreign key orphans, and checks date conformities. |
+| `pg_load.py` | **Core Utilities:** Reusable, database-agnostic connection and bulk-insert manager. |
+
+---
+
+## Key Design Decisions & Quality Gates
+
+### 1. The Bronze ELT Philosophy
+The Bronze layer acts as an **immutable, raw text mirror** of the source system. No schema casting, cleansing, or trimming happens in Python. This guarantees full auditability. All type safety, structural casting, and business re-modeling are deferred entirely to **dbt**.
+
+### 2. Empirical Key Verification (No Assumptions)
+* **Composite Keys:** While `review_id` sounds like a natural Primary Key, profiling revealed it repeats **814 times** across distinct reviews. The true operational grain is composite: `(review_id, order_id)`.
+* **Synthetic PKs via Hashing:** The `geolocation` dataset contains **26.18% exact duplicate rows** and lacks a natural key. Instead of dropping data blindly, an MD5 content hash (`_row_hash`) was engineered across all business attributes to act as a deterministic, synthetic PK.
+
+### 3. Idempotency by Design
+Every Python script and SQL load operation is completely idempotent. By using `ON CONFLICT DO NOTHING` statements, the pipelines can be executed repeatedly at any frequency without risking data duplication or pipeline crashes.
+
+### 4. Dynamic Financial Integration (Macro Factors)
+To evaluate metrics in Euros, the pipeline queries the Frankfurter API. The requested date range is **computed dynamically** via SQL from `bronze.orders` (from `2016-09-01` to `2018-10-20`). 
+* *Why?* Choosing the order purchase timestamp over the payment approval timestamp was critical: business prices are locked at checkout, and **30.9% of orders** present a multi-day lag before final payment approval.
+
+---
+
+## Project Evolution Roadmap
+
+To showcase senior-level data architecture scaling, this project is transitioning across three implementation phases:
+
+* [x] **Phase 1: Local Ingestion Architecture (Completed)** -> Python raw ingestion + API boundary calls + PostgreSQL.
+* [ ] **Phase 2: Modern Ingestion & Medallion (In Progress)** -> Encapsulate CSV sources into a high-performance **FastAPI microservice** to simulate streaming/application ingestion. Migrate transformation workflows to full **dbt Core staging and marts models**.
+* [ ] **Phase 3: Semantic BI Layer** -> Build an analytical Star Schema in **Power BI**, implementing advanced time-intelligence DAX measures to analyze sales, logistics performance, and currency conversion impact.
