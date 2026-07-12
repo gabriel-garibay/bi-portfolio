@@ -1,0 +1,96 @@
+version: 2
+
+models:
+  - name: stg_olist__customers
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+
+  - name: stg_olist__sellers
+    columns:
+      - name: seller_id
+        tests: [unique, not_null]
+
+  - name: stg_olist__products
+    columns:
+      - name: product_id
+        tests: [unique, not_null]
+
+  - name: stg_olist__product_category_name_translation
+    columns:
+      - name: product_category_name
+        tests: [unique, not_null]
+
+  - name: stg_olist__geolocation
+
+  - name: stg_olist__orders
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_olist__customers')
+              field: customer_id
+
+  - name: stg_olist__order_items
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+              - order_id
+              - order_item_id
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_olist__orders')
+              field: order_id
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_olist__products')
+              field: product_id
+      - name: seller_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_olist__sellers')
+              field: seller_id
+
+  - name: stg_olist__order_payments
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - order_id
+            - payment_sequential
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_olist__orders')
+              field: order_id
+
+  - name: stg_olist__order_reviews
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - review_id
+            - order_id
+    columns:
+      - name: review_id
+        tests: [not_null]
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_olist__orders')
+              field: order_id
+
+  - name: stg_olist__exchange_rates
+    columns:
+      - name: rate_date
+        tests: [not_null]
