@@ -1,5 +1,5 @@
 """
-Loads raw Olist data into the bronze schema in PostgreSQL (typed as TEXT). CSV/Olist source: TABLE_MAP and extract_from_csv().
+Loads raw Olist data into the bronze schema in PostgreSQL (typed as TEXT). FastAPI source: TABLE_MAP and extract_from_api().
 NOT clean, cast, join, or interpret data. Any transformation belongs in dbt staging models (silver).
 """
 
@@ -8,136 +8,56 @@ import hashlib  # hash for geolocation table
 import logging
 import sys
 import time
+import requests
 from pathlib import Path
+
 from typing import Iterator
 
-from pg_load import get_connection, load_table, verify_load
+# To use TABLE_MAP
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from pg_load import get_connection, load_table, verify_load  # noqa: E402
+from shared.table_map import TABLE_MAP  # noqa: E402 # Shared table metadata
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "raw"
-
-# Maps bronze table name -> source file, ordered column list, and conflict key. Column order MUST match the CSV header order.
-TABLE_MAP: dict[str, dict] = {
-    "customers": {
-        "file": "olist_customers_dataset.csv",
-        "columns": [
-            "customer_id",
-            "customer_unique_id",
-            "customer_zip_code_prefix",
-            "customer_city",
-            "customer_state",
-        ],
-        "conflict_key": "(customer_id)",
-        "hash": False,
-    },
-    "orders": {
-        "file": "olist_orders_dataset.csv",
-        "columns": [
-            "order_id",
-            "customer_id",
-            "order_status",
-            "order_purchase_timestamp",
-            "order_approved_at",
-            "order_delivered_carrier_date",
-            "order_delivered_customer_date",
-            "order_estimated_delivery_date",
-        ],
-        "conflict_key": "(order_id)",
-        "hash": False,
-    },
-    "order_items": {
-        "file": "olist_order_items_dataset.csv",
-        "columns": [
-            "order_id",
-            "order_item_id",
-            "product_id",
-            "seller_id",
-            "shipping_limit_date",
-            "price",
-            "freight_value",
-        ],
-        "conflict_key": "(order_id, order_item_id)",
-        "hash": False,
-    },
-    "order_payments": {
-        "file": "olist_order_payments_dataset.csv",
-        "columns": [
-            "order_id",
-            "payment_sequential",
-            "payment_type",
-            "payment_installments",
-            "payment_value",
-        ],
-        "conflict_key": "(order_id, payment_sequential)",
-        "hash": False,
-    },
-    "order_reviews": {
-        "file": "olist_order_reviews_dataset.csv",
-        "columns": [
-            "review_id",
-            "order_id",
-            "review_score",
-            "review_comment_title",
-            "review_comment_message",
-            "review_creation_date",
-            "review_answer_timestamp",
-        ],
-        "conflict_key": "(review_id, order_id)",
-        "hash": False,
-    },
-    "products": {
-        "file": "olist_products_dataset.csv",
-        "columns": [
-            "product_id",
-            "product_category_name",
-            "product_name_lenght",
-            "product_description_lenght",
-            "product_photos_qty",
-            "product_weight_g",
-            "product_length_cm",
-            "product_height_cm",
-            "product_width_cm",
-        ],
-        "conflict_key": "(product_id)",
-        "hash": False,
-    },
-    "sellers": {
-        "file": "olist_sellers_dataset.csv",
-        "columns": [
-            "seller_id",
-            "seller_zip_code_prefix",
-            "seller_city",
-            "seller_state",
-        ],
-        "conflict_key": "(seller_id)",
-        "hash": False,
-    },
-    "geolocation": {
-        "file": "olist_geolocation_dataset.csv",
-        "columns": [
-            "geolocation_zip_code_prefix",
-            "geolocation_lat",
-            "geolocation_lng",
-            "geolocation_city",
-            "geolocation_state",
-        ],
-        "conflict_key": "(_row_hash)",
-        "hash": True,
-    },
-    "product_category_name_translation": {
-        "file": "product_category_name_translation.csv",
-        "columns": [
-            "product_category_name",
-            "product_category_name_english",
-        ],
-        "conflict_key": "(product_category_name)",
-        "hash": False,
-    },
-}
+API_BASE_URL = "http://127.0.0.1:8000"
 
 logger = logging.getLogger("bronze_load")
 
 
-# Extraction layer
+# Ingest from FastApi
+def extract_from_api(
+    table_name: str,
+    compute_row_hash: bool = False,
+    columns: list[str] | None = None,
+    page_size: int = 1000,
+) -> Iterator[dict]:
+    # Fetch a table from the FastAPI service, page by page, yielding one dict per row.
+    page = 1
+    while True:
+        response = requests.get(
+            f"{API_BASE_URL}/{table_name}",
+            params={"page": page, "size": page_size},
+            timeout=30,
+        )
+        response.raise_for_status()
+        payload = response.json()
+
+        for row in payload["data"]:
+            if compute_row_hash:
+                if columns is None:
+                    raise ValueError("columns is required when compute_row_hash=True")
+                raw = "|".join(str(row[col]) for col in columns)
+                row["_row_hash"] = hashlib.md5(raw.encode("utf-8")).hexdigest()
+            yield row
+
+        if page >= payload["total_pages"]:
+            break
+        page += 1
+
+
+# kept for reference and local testing. Production ingestion now uses extract_from_api(), same output (Iterator[dict]), different source
 def extract_from_csv(
     file_path: Path,
     columns: list[str],
@@ -164,10 +84,9 @@ def extract_from_csv(
             yield row
 
 
-# Orchestration
 def main() -> None:
     start_time = time.time()
-    logger.info("Starting bronze load - source: local CSV (%s)", DATA_DIR)
+    logger.info("Starting bronze load - source: FastAPI (%s)", API_BASE_URL)
 
     conn = get_connection()
     summary: dict[str, int] = {}
@@ -175,15 +94,15 @@ def main() -> None:
 
     try:
         for table_name, config in TABLE_MAP.items():
-            file_path = DATA_DIR / config["file"]
+            # file_path = DATA_DIR / config["file"]
             try:
                 logger.info("Extracting %s from %s", table_name, config["file"])
 
                 needs_hash = config.get("hash", False)
-                records = extract_from_csv(
-                    file_path,
-                    config["columns"],
+                records = extract_from_api(
+                    table_name,
                     compute_row_hash=needs_hash,
+                    columns=config["columns"],
                 )
 
                 insert_columns = (

@@ -1,0 +1,11 @@
+BI-PORTFOLIO
++---api      
++---scripts
+�   �   01_raw_explore.py
+�   �   02_bronze_ddl.py
+�   �   03_bronze_load_exchange.py
+�   �   03_bronze_load_olist.py
+�   �   04_bronze_explore.py
+�   �   pg_load.py       
++---shared
+�       table_map.py
