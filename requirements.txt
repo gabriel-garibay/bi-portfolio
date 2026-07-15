@@ -1,0 +1,18 @@
+# Database
+psycopg2-binary==2.9.12
+python-dotenv==1.2.2
+
+# Data / ML
+pandas==3.0.3
+scikit-learn==1.9.0
+
+# API
+fastapi==0.139.0
+uvicorn==0.51.0
+
+# External data source (Frankfurter API)
+requests==2.34.2
+
+# dbt
+dbt-core==1.12.0rc2
+dbt-postgres==1.10.2

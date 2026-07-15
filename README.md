@@ -52,6 +52,8 @@ A production-inspired, end-to-end data platform built to replicate modern Analyt
 | `04_bronze_explore.py` | Post-load quality gate: row counts, FK orphans, date conformity |
 | `pg_load.py` | Reusable connection and bulk-insert utilities |
 
+*(`ml_category_diagnostic.py` also lives in `/scripts` but is exploratory — see [Key Design Decisions §7](#7-ml-based-category-imputation-tested-not-adopted).)*
+
 **Full technical detail — data quality findings, design trade-offs, and test results — lives in the reports below, not in this file:**
 
 | Report | Covers |
@@ -62,6 +64,7 @@ A production-inspired, end-to-end data platform built to replicate modern Analyt
 | [`04_silver_exploration.md`](./reports/04_silver_exploration.md) | Staging + intermediate models, LOCF FX gap-filling, fan-out prevention |
 | [`05_gold_exploration.md`](./reports/05_gold_exploration.md) | Star schema design, fact grain separation, test coverage |
 | [`06_fastapi_migration.md`](./reports/06_fastapi_migration.md) | CSV → FastAPI extraction migration, interface-contract validation |
+| [`ml_category_diagnostic.md`](./reports/exploratory/ml_category_diagnostic.md) | RandomForest diagnostic on physical dimensions as `product_category_name` predictor — not adopted in production |
 
 ---
 
@@ -85,3 +88,6 @@ The Frankfurter API request range is computed dynamically from `bronze.orders` (
 
 ### 6. Fan-Out Prevention in Gold
 `order_payments` and `order_reviews` are pre-aggregated in the intermediate layer before any join to a fact table, preventing silent row duplication across multi-item orders. Two separate facts (`fct_order_items`, `fct_orders`) are kept at different grains rather than merged. Full rationale in [`05_gold_exploration.md`](./reports/05_gold_exploration.md).
+
+### 7. ML-Based Category Imputation: Tested, Not Adopted
+A RandomForest diagnostic tested whether physical product dimensions predict missing `product_category_name`. Result: 33.7% accuracy across 71 categories — well above baseline, but too low to trust over an explicit `NULL`. Full method and results in [`ml_category_diagnostic.md`](./reports/ml_category_diagnostic.md).

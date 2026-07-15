@@ -25,6 +25,10 @@ _DATA: dict[str, list[dict]] = {}
 async def lifespan(app: FastAPI):
     for table_name, config in TABLE_MAP.items():
         file_path = DATA_DIR / config["file"]
+        if not file_path.exists():
+            raise FileNotFoundError(
+                f"Missing {config['file']} in {DATA_DIR} — download the Olist dataset first"
+            )
         with file_path.open("r", encoding="utf-8-sig") as f:
             reader = csv.DictReader(f)
             _DATA[table_name] = [row for row in reader]
