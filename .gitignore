@@ -7,3 +7,6 @@ outputs/
 data/raw/
 personal_notes.txt
 requirements.txt
+*.pbix
+**/.pbi/cache.abf
+**/.pbi/localSettings.json
