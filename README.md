@@ -14,6 +14,11 @@ A production-inspired, end-to-end data platform built to replicate modern Analyt
 
 ---
 
+## Power BI Dashboard (in progress)
+Exploratory analytics dashboard consuming the gold schema (`powerbi/`). Detailed documentation (visuals, DAX measures, modeling decisions) pending until the first stable version is closed.
+
+---
+
 ## Data Architecture Workflow
 * **[Raw Sources]** → 9 Olist CSVs (served via FastAPI) + Frankfurter API (BRL/EUR rates)
 * **[Layer 1: Bronze]** → PostgreSQL Target (Immutable Raw TEXT Mirror)

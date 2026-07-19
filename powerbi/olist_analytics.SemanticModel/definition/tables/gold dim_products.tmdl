@@ -1,0 +1,105 @@
+table 'gold dim_products'
+	lineageTag: b0457d58-d02b-4846-87f0-5e19250fe282
+
+	column product_id
+		dataType: string
+		lineageTag: 887ff51e-d6ef-4b0d-bd2f-9e838885189f
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_category_name
+		dataType: string
+		lineageTag: 2a2fe6df-2e9e-41e9-b7ac-827479ea203e
+		summarizeBy: none
+		sourceColumn: product_category_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_category_name_english
+		dataType: string
+		lineageTag: 06e4e465-70fd-4176-a4e1-cceb833c57db
+		summarizeBy: none
+		sourceColumn: product_category_name_english
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name_length
+		dataType: int64
+		formatString: 0
+		lineageTag: f930b05b-1cc1-4315-8d01-3ad5682f3fba
+		summarizeBy: none
+		sourceColumn: product_name_length
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_description_length
+		dataType: int64
+		formatString: 0
+		lineageTag: 8d0ad558-7d7e-461e-bb65-e76d56e989ba
+		summarizeBy: none
+		sourceColumn: product_description_length
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_photos_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 714d1f4c-6514-41ae-baf4-9d1ae7ae2d13
+		summarizeBy: none
+		sourceColumn: product_photos_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_weight_g
+		dataType: double
+		lineageTag: feff172e-bd13-44e2-9ed0-93f71a70d086
+		summarizeBy: none
+		sourceColumn: product_weight_g
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column product_length_cm
+		dataType: double
+		lineageTag: d3d3053c-6e95-4cd4-b47c-1a75a6465cee
+		summarizeBy: none
+		sourceColumn: product_length_cm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column product_height_cm
+		dataType: double
+		lineageTag: 1a8a273f-5180-4a21-ba28-4bf7f7d47463
+		summarizeBy: none
+		sourceColumn: product_height_cm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column product_width_cm
+		dataType: double
+		lineageTag: 10dcdb77-e134-400d-8a2c-9b952b956e39
+		summarizeBy: none
+		sourceColumn: product_width_cm
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'gold dim_products' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "de_portfolio"),
+				    gold_dim_products = Source{[Schema="gold",Item="dim_products"]}[Data]
+				in
+				    gold_dim_products
+
+	annotation PBI_ResultType = Table
+

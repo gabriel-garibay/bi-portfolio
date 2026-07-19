@@ -1,0 +1,154 @@
+table dim_date
+	lineageTag: a7bb76b7-751c-46de-8dcb-102406bf968a
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c08b9a15-35e2-4608-b5ac-6e8f3518a647
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 751930e3-e3cf-4db5-8193-e56a9a972867
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column nMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: b98d0143-df7c-4753-8b2a-4d4e5ce48ad2
+		summarizeBy: sum
+		sourceColumn: nMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: 0fc0a6ab-bb33-48a9-bda0-5dff66c713b9
+		summarizeBy: sum
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e34b64d-000b-4072-b92e-73c2147e6d5d
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 8dae0101-fe8e-485c-a527-4de1179fb387
+		summarizeBy: none
+		sourceColumn: Month
+		sortByColumn: nMonth
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year'
+		dataType: string
+		lineageTag: b210bd0b-b12d-41b7-9365-7bc578eeece6
+		summarizeBy: none
+		sourceColumn: Month Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekDay
+		dataType: string
+		lineageTag: 2b1c38b6-16f9-4e6b-9aa2-30ff8712af25
+		summarizeBy: none
+		sourceColumn: WeekDay
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthYearID
+		dataType: int64
+		formatString: 0
+		lineageTag: 3b99ba4b-3f15-45c1-ab15-4777b4af4677
+		summarizeBy: count
+		sourceColumn: MonthYearID
+
+		annotation SummarizationSetBy = Automatic
+
+	column nDate
+		dataType: int64
+		formatString: 0
+		lineageTag: d286ccc7-d7e5-46b6-a998-153bd4e6cd44
+		summarizeBy: sum
+		sourceColumn: nDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column Week
+		dataType: int64
+		formatString: 0
+		lineageTag: 734d3c8d-2581-4c7b-927c-10a8e548bb1d
+		summarizeBy: sum
+		sourceColumn: Week
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekYearID
+		dataType: int64
+		formatString: 0
+		lineageTag: 1151c511-26f2-4ce6-adb8-db791299cb9a
+		summarizeBy: count
+		sourceColumn: WeekYearID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Week-Year
+		dataType: string
+		lineageTag: 6120c740-cf0a-4650-91a9-1bc2f923a4b0
+		summarizeBy: none
+		sourceColumn: Week-Year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = m
+		mode: import
+		source =
+				let
+				   Origen = #"gold fct_orders"[order_purchase_timestamp],
+				   FechaMin = List.Min(Origen),
+				   FechaMax = List.Max(Origen),
+				   InicioAnio = #date(Date.Year(FechaMin),1,1),
+				   FinAnio = #date(Date.Year(FechaMax),12,31),
+				   Fechas = List.Dates(InicioAnio, Number.From(FinAnio)-Number.From(InicioAnio)+1, #duration(1,0,0,0)),
+				   #"Convertida en tabla" = Table.FromList(Fechas, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				   #"Columnas con nombre cambiado" = Table.RenameColumns(#"Convertida en tabla",{{"Column1", "Date"}}),
+				   #"Tipo cambiado" = Table.TransformColumnTypes(#"Columnas con nombre cambiado",{{"Date", type date}}),
+				   #"Año insertado" = Table.AddColumn(#"Tipo cambiado", "Year", each Date.Year([Date]), Int64.Type),
+				   #"Mes insertado" = Table.AddColumn(#"Año insertado", "nMonth", each Date.Month([Date]), Int64.Type),
+				   #"Día insertado" = Table.AddColumn(#"Mes insertado", "Day", each Date.Day([Date]), Int64.Type),
+				   #"Trimestre insertado" = Table.AddColumn(#"Día insertado", "Quarter", each Date.QuarterOfYear([Date]), Int64.Type),
+				   #"Mes" = Table.AddColumn(#"Trimestre insertado", "Month", each Date.ToText([Date], "MMM", "es-PA")),
+				   #"Mes Año" = Table.AddColumn(Mes, "Month Year", each [Month] & " " & Number.ToText([Year])),
+				   #"Dia de la semana" = Table.AddColumn(#"Mes Año", "WeekDay", each Date.ToText([Date], "ddd", "es-PA")),
+				   #"Mes Año ID" = Table.AddColumn(#"Dia de la semana", "MonthYearID", each Number.ToText([Year]) & Date.ToText([Date], "MM")),
+				   #"nFecha" = Table.AddColumn(#"Mes Año ID", "nDate", each [Date],type date),
+				   #"Semana" = Table.AddColumn(#"nFecha","Week",each Date.WeekOfYear([Date]), Int64.Type),
+				   #"SemanaAñoID" = Table.AddColumn(#"Semana","WeekYearID",each Number.ToText([Year]) & Number.ToText([Week],"00")),
+				   #"Semana Año" = Table.AddColumn(#"SemanaAñoID","Week-Year",each "Week "&Number.ToText([Week],"00")&" - "&Number.ToText([Year]),type text),
+				   #"Changed Type" = Table.TransformColumnTypes(#"Semana Año",{{"MonthYearID", Int64.Type}, {"WeekDay", type text}, {"Month Year", type text}, {"Month", type text}, {"WeekYearID", Int64.Type}, {"nDate", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

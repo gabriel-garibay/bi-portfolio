@@ -1,0 +1,255 @@
+table 'gold fct_orders'
+	lineageTag: 6fa415b2-66ce-4e73-9aa1-f4cf86599e35
+
+	column order_id
+		dataType: string
+		lineageTag: 978b4d9f-4dd2-406f-8485-591fe8fb77bf
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		lineageTag: 985171c3-e72b-460f-ba5b-e112cbab441c
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status
+		dataType: string
+		lineageTag: ed35a4b1-9b09-4aac-aab7-cd68cfc6951b
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_purchase_timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1e764e89-8386-49e6-81fe-7d166038339f
+		summarizeBy: none
+		sourceColumn: order_purchase_timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_approved_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6685653f-21ef-477d-a6ec-0b356f946280
+		summarizeBy: none
+		sourceColumn: order_approved_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_delivered_carrier_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 605a3d29-a615-40d2-9df5-ad9c134ccbeb
+		summarizeBy: none
+		sourceColumn: order_delivered_carrier_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_delivered_customer_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 46f87f6c-bc7b-44f8-ad82-8812d1c87ff1
+		summarizeBy: none
+		sourceColumn: order_delivered_customer_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_estimated_delivery_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ad103693-2b12-41da-a425-c803210c8216
+		summarizeBy: none
+		sourceColumn: order_estimated_delivery_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_payment_value
+		dataType: double
+		lineageTag: 13463611-dd0b-419a-bfa2-803b019cbff8
+		summarizeBy: sum
+		sourceColumn: total_payment_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column payment_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 0beba5f6-6c38-41cb-8583-b4697eea7727
+		summarizeBy: sum
+		sourceColumn: payment_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column max_installments
+		dataType: int64
+		formatString: 0
+		lineageTag: 17059432-3112-46e4-8d75-46378db4727c
+		summarizeBy: sum
+		sourceColumn: max_installments
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_types
+		dataType: string
+		lineageTag: 34244b5b-4151-49dc-af22-74852eee8cdc
+		summarizeBy: none
+		sourceColumn: payment_types
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_score
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e509688-630b-48e8-a00f-9a5d0f60f2a5
+		summarizeBy: sum
+		sourceColumn: review_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_comment_title
+		dataType: string
+		lineageTag: 1f607f5f-e7fb-4005-b68d-67854344c14a
+		summarizeBy: none
+		sourceColumn: review_comment_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_comment_message
+		dataType: string
+		lineageTag: 53ec946e-4f41-4262-9bb0-e0c030008736
+		summarizeBy: none
+		sourceColumn: review_comment_message
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_creation_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f8aa10fb-2644-4094-a258-f01ba109fcdc
+		summarizeBy: none
+		sourceColumn: review_creation_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_answer_timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6a58da61-806e-433d-b148-38b5aa8b7210
+		summarizeBy: none
+		sourceColumn: review_answer_timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_zip_code_prefix
+		dataType: string
+		isHidden
+		lineageTag: bc3679dd-1947-48ec-b7de-f1221b0208c5
+		summarizeBy: none
+		sourceColumn: customer_zip_code_prefix
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_city
+		dataType: string
+		isHidden
+		lineageTag: 1dcdf502-a8be-49a7-9db1-a66e5349fba0
+		summarizeBy: none
+		sourceColumn: customer_city
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_state
+		dataType: string
+		isHidden
+		lineageTag: abb5c007-2f48-4da5-913b-fb33ee2308a5
+		summarizeBy: none
+		sourceColumn: customer_state
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e24d025d-5e79-4958-b6e8-3c331b77401a
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Delivery Delay (days)' = DATEDIFF('gold fct_orders'[order_estimated_delivery_date], 'gold fct_orders'[order_delivered_customer_date], DAY)
+		formatString: 0
+		lineageTag: afc6f866-33ad-4429-9984-d998b0638c4d
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Bucket' =
+			
+			VAR d = 'gold fct_orders'[Delivery Delay (days)]
+			RETURN
+			    SWITCH(TRUE(),
+			        ISBLANK(d), "Not Delivered",
+			        d < 0, "Early",
+			        d = 0, "On Time",
+			        d <= 7, "Late 1-7d",
+			        "Late 8d+"
+			    )
+		lineageTag: 54b4a24f-484c-4a5f-b85b-a9dfcab6f5fc
+		summarizeBy: none
+		sortByColumn: 'Delivery Bucket Order'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Bucket Order' =
+			
+			VAR d = 'gold fct_orders'[Delivery Delay (days)]
+			RETURN
+			    SWITCH(TRUE(),
+			        ISBLANK(d), 5,
+			        d < 0, 1,
+			        d = 0, 2,
+			        d <= 7, 3,
+			        4
+			    )
+		formatString: 0
+		lineageTag: b9c18670-94c4-4eae-ac61-8ec4c89ade2e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold fct_orders' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "de_portfolio"),
+				    gold_fct_orders = Source{[Schema="gold",Item="fct_orders"]}[Data],
+				    #"Duplicated Column" = Table.DuplicateColumn(gold_fct_orders, "order_purchase_timestamp", "order_purchase_onlydate"),
+				    #"Inserted Date" = Table.AddColumn(#"Duplicated Column", "Date", each DateTime.Date([order_purchase_onlydate]), type date),
+				    #"Removed Columns" = Table.RemoveColumns(#"Inserted Date",{"order_purchase_onlydate", "Date"}),
+				    #"Inserted Date1" = Table.AddColumn(#"Removed Columns", "Date", each DateTime.Date([order_purchase_timestamp]), type date)
+				in
+				    #"Inserted Date1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

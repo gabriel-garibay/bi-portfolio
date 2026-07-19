@@ -1,0 +1,108 @@
+table _Measures
+	lineageTag: ad0caaf6-6361-44e8-b86d-fd4a7a0545e0
+
+	measure 'Total Revenue (EUR)' = SUM('gold fct_order_items'[price_eur])
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 89434a36-cd99-4835-89b5-6207eb69088b
+
+	measure 'Total Freight (EUR)' = SUM('gold fct_order_items'[freight_value_eur])
+		lineageTag: 16a67ef9-c239-424b-a8cf-0ca8ae15e6a2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Order Count' = COUNTROWS('gold fct_orders')
+		formatString: #,0
+		lineageTag: cbb4c22e-547d-448d-9e47-1c28e36ec92e
+
+	measure 'Avg Order Value (EUR)' = DIVIDE([Total Revenue (EUR)], [Order Count])
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 876530f9-18f0-48de-89c1-e46348ee04db
+
+	measure 'Avg Review Score' = AVERAGE('gold fct_orders'[review_score])
+		lineageTag: 5c12db5f-ef4f-486f-a21f-af5823350f98
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue MoM %' =
+			VAR CurrentRevenue = [Total Revenue (EUR)]
+			VAR PreviousMonthRevenue =
+			    CALCULATE([Total Revenue (EUR)], DATEADD(dim_date[Date], -1, MONTH))
+			RETURN
+			    DIVIDE(CurrentRevenue - PreviousMonthRevenue, PreviousMonthRevenue)
+		lineageTag: 1420961b-b29e-4de3-8786-31115fa5f5bf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue YoY %' =
+			VAR CurrentRevenue = [Total Revenue (EUR)]
+			VAR PreviousYearRevenue =
+			    CALCULATE([Total Revenue (EUR)], SAMEPERIODLASTYEAR(dim_date[Date]))
+			RETURN
+			    DIVIDE(CurrentRevenue - PreviousYearRevenue, PreviousYearRevenue)
+		lineageTag: 95c2bcef-5fce-41ce-bf6f-6122fee1fe30
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Seller Revenue Rank' = RANKX(ALLSELECTED('gold dim_sellers'), CALCULATE([Total Revenue (EUR)], REMOVEFILTERS('gold dim_products')), , DESC, DENSE)
+		formatString: 0
+		lineageTag: 73061a14-4d6a-40e7-a3a4-dc34173d931e
+
+	measure 'Revenue at Rank' =
+			
+			VAR CurrentSlot = SELECTEDVALUE('sup_rank'[RankSlot])
+			VAR RankedCategories =
+			    ADDCOLUMNS(
+			        ALLSELECTED('gold dim_products'[product_category_name_english]),
+			        "@Revenue", CALCULATE([Total Revenue (EUR)])
+			    )
+			VAR WithRank =
+			    ADDCOLUMNS(RankedCategories, "@Rank", RANKX(RankedCategories, [@Revenue],, DESC))
+			RETURN
+			    IF(
+			        ISBLANK(CurrentSlot),
+			        [Total Revenue (EUR)],
+			        IF(
+			            CurrentSlot = 11,
+			            SUMX(FILTER(WithRank, [@Rank] > 10), [@Revenue]),
+			            SUMX(FILTER(WithRank, [@Rank] = CurrentSlot), [@Revenue])
+			        )
+			    )
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: 0a746bcc-325a-4729-b610-d179eb1b50e6
+
+	measure 'Category Name at Rank' =
+			
+			VAR CurrentSlot = SELECTEDVALUE('sup_rank'[RankSlot])
+			VAR RankedCategories =
+			    ADDCOLUMNS(
+			        ALLSELECTED('gold dim_products'[product_category_name_english]),
+			        "@Revenue", CALCULATE([Total Revenue (EUR)])
+			    )
+			VAR WithRank =
+			    ADDCOLUMNS(RankedCategories, "@Rank", RANKX(RankedCategories, [@Revenue],, DESC))
+			RETURN
+			    IF(CurrentSlot = 11, "Otros", MAXX(FILTER(WithRank, [@Rank] = CurrentSlot), [product_category_name_english]))
+		lineageTag: d8167947-cee2-4a12-b455-d24b0d5cba4f
+
+	measure 'Revenue Share by State %' = DIVIDE([Total Revenue (EUR)], CALCULATE([Total Revenue (EUR)], ALL('gold dim_customers'[geo_state])))
+		lineageTag: f8959e44-d481-4928-90f9-1c7c413481f9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Order Value by State (EUR)' = DIVIDE([Total Revenue (EUR)], DISTINCTCOUNT('gold fct_orders'[order_id]))
+		lineageTag: 972d812f-83ef-4acf-9a06-cf157dc9aa3a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

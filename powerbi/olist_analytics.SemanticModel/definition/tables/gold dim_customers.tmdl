@@ -1,0 +1,129 @@
+table 'gold dim_customers'
+	lineageTag: 141a0b58-68e0-46b2-8fb0-361cca6a55e0
+
+	column customer_id
+		dataType: string
+		lineageTag: aa8a7f4a-49fe-4482-a2b3-da230ac46e9b
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_unique_id
+		dataType: string
+		lineageTag: 40e31fe9-a47b-481f-9e33-7a7be87a56ec
+		summarizeBy: none
+		sourceColumn: customer_unique_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_zip_code_prefix
+		dataType: string
+		lineageTag: 4d40c48e-2123-4744-b46d-542da0188daf
+		summarizeBy: none
+		sourceColumn: customer_zip_code_prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_city
+		dataType: string
+		lineageTag: 583bf457-644d-45bd-bb27-8dcd1958f281
+		summarizeBy: none
+		sourceColumn: customer_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_state
+		dataType: string
+		lineageTag: c8115667-1787-45fb-b80e-9b91df9a96ca
+		summarizeBy: none
+		sourceColumn: customer_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_lat
+		dataType: double
+		lineageTag: 2ba5aa03-8ec3-4e30-bcab-1bc8d85b525b
+		summarizeBy: sum
+		sourceColumn: avg_lat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_lng
+		dataType: double
+		lineageTag: 942dfd6f-d364-4fc2-8215-abb26121d778
+		summarizeBy: sum
+		sourceColumn: avg_lng
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column geo_city
+		dataType: string
+		lineageTag: 203be8fc-af56-4399-b0c8-6e6cd141fef8
+		summarizeBy: none
+		sourceColumn: geo_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column geo_state
+		dataType: string
+		lineageTag: 27a8d0c6-523e-4ee0-bb9d-2d103feb4004
+		summarizeBy: none
+		sourceColumn: geo_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column geo_state_full =
+			
+			SWITCH(
+			    'gold dim_customers'[geo_state],
+			    "AC", "Acre",
+			    "AL", "Alagoas",
+			    "AP", "Amapa",
+			    "AM", "Amazonas",
+			    "BA", "Bahia",
+			    "CE", "Ceara",
+			    "DF", "Distrito Federal",
+			    "ES", "Espirito Santo",
+			    "GO", "Goias",
+			    "MA", "Maranhao",
+			    "MT", "Mato Grosso",
+			    "MS", "Mato Grosso do Sul",
+			    "MG", "Minas Gerais",
+			    "PA", "Para",
+			    "PB", "Paraiba",
+			    "PR", "Parana",
+			    "PE", "Pernambuco",
+			    "PI", "Piaui",
+			    "RJ", "Rio de Janeiro",
+			    "RN", "Rio Grande do Norte",
+			    "RS", "Rio Grande do Sul",
+			    "RO", "Rondonia",
+			    "RR", "Roraima",
+			    "SC", "Santa Catarina",
+			    "SP", "Sao Paulo",
+			    "SE", "Sergipe",
+			    "TO", "Tocantins",
+			    "Desconocido"
+			)
+		lineageTag: df60ff61-9e55-4905-85dc-934145800ccf
+		dataCategory: StateOrProvince
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold dim_customers' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "de_portfolio"),
+				    gold_dim_customers = Source{[Schema="gold",Item="dim_customers"]}[Data]
+				in
+				    gold_dim_customers
+
+	annotation PBI_ResultType = Table
+

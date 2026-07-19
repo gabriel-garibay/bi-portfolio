@@ -1,0 +1,34 @@
+table sup_rank
+	lineageTag: 1449ac65-a5e6-4564-886f-d68542248c3b
+
+	column RankSlot
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e040bbb-f8ea-4611-9ebb-d30dadfcce48
+		summarizeBy: sum
+		sourceColumn: RankSlot
+
+		annotation SummarizationSetBy = Automatic
+
+	column RankLabel
+		dataType: string
+		lineageTag: c6e3a73a-991c-4ba4-9ed5-eb7e92c3ba64
+		summarizeBy: none
+		sourceColumn: RankLabel
+		sortByColumn: RankSlot
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sup_rank = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("Jc25DcAwDEPRXVS78CUfU3gAQTMYSLI/QtMFgVfxm0mSgHkwyVCmClSoClVKIaUa1KgOdWpAg5rQpFI81/H6ZNb37Ffcfw==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [RankSlot = _t, RankLabel = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"RankSlot", Int64.Type}, {"RankLabel", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

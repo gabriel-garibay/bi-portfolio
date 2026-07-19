@@ -1,0 +1,121 @@
+table 'gold dim_sellers'
+	lineageTag: b6739c33-2362-4490-94a8-8594d969f364
+
+	column seller_id
+		dataType: string
+		lineageTag: fad5ed3b-5286-4e4b-93db-c6cbc5a295f9
+		summarizeBy: none
+		sourceColumn: seller_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_zip_code_prefix
+		dataType: string
+		lineageTag: 6e13aa2e-dc50-414b-828f-587ef38c05d4
+		summarizeBy: none
+		sourceColumn: seller_zip_code_prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_city
+		dataType: string
+		lineageTag: fa66258b-ab2d-43b2-91c1-f5573e45574f
+		summarizeBy: none
+		sourceColumn: seller_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_state
+		dataType: string
+		lineageTag: 8ed008da-2d8c-43df-903d-674ecc2e46c4
+		summarizeBy: none
+		sourceColumn: seller_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_lat
+		dataType: double
+		lineageTag: d496d3a7-5743-4c78-aaec-48f0efb4dbff
+		summarizeBy: none
+		sourceColumn: avg_lat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_lng
+		dataType: double
+		lineageTag: 4aab14b7-e9e9-4f20-beb4-09c36373cd39
+		summarizeBy: none
+		sourceColumn: avg_lng
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column geo_city
+		dataType: string
+		lineageTag: 106a562a-ffc8-46dc-9ba1-81e78238c8ef
+		summarizeBy: none
+		sourceColumn: geo_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column geo_state
+		dataType: string
+		lineageTag: ba46687a-feed-44a0-99bb-2e4be1ca0b50
+		summarizeBy: none
+		sourceColumn: geo_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column geo_state_full =
+			
+			SWITCH(
+			    'gold dim_sellers'[geo_state],
+			    "AC", "Acre",
+			    "AL", "Alagoas",
+			    "AP", "Amapa",
+			    "AM", "Amazonas",
+			    "BA", "Bahia",
+			    "CE", "Ceara",
+			    "DF", "Distrito Federal",
+			    "ES", "Espirito Santo",
+			    "GO", "Goias",
+			    "MA", "Maranhao",
+			    "MT", "Mato Grosso",
+			    "MS", "Mato Grosso do Sul",
+			    "MG", "Minas Gerais",
+			    "PA", "Para",
+			    "PB", "Paraiba",
+			    "PR", "Parana",
+			    "PE", "Pernambuco",
+			    "PI", "Piaui",
+			    "RJ", "Rio de Janeiro",
+			    "RN", "Rio Grande do Norte",
+			    "RS", "Rio Grande do Sul",
+			    "RO", "Rondonia",
+			    "RR", "Roraima",
+			    "SC", "Santa Catarina",
+			    "SP", "Sao Paulo",
+			    "SE", "Sergipe",
+			    "TO", "Tocantins",
+			    "Desconocido"
+			)
+		lineageTag: 22f4c7df-8bde-45e6-a76a-1b670e5034cc
+		dataCategory: StateOrProvince
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold dim_sellers' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost:5432", "de_portfolio"),
+				    gold_dim_sellers = Source{[Schema="gold",Item="dim_sellers"]}[Data]
+				in
+				    gold_dim_sellers
+
+	annotation PBI_ResultType = Table
+
