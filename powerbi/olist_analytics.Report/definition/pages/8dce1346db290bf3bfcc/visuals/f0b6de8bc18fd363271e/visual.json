@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "f0b6de8bc18fd363271e",
   "position": {
-    "x": 87.200941889908549,
-    "y": 389.76178572004579,
-    "z": 6000,
-    "height": 307.8457493992226,
-    "width": 376.54952179733237,
-    "tabOrder": 5000
+    "x": 6.7109219605627235,
+    "y": 388.94794616684464,
+    "z": 1000,
+    "height": 307.92078203352128,
+    "width": 579.96729819905954,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "pivotTable",
@@ -64,9 +64,56 @@
               "queryRef": "_Measures.Revenue at Rank",
               "nativeQueryRef": "Revenue",
               "displayName": "Revenue"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Freight at Rank"
+                }
+              },
+              "queryRef": "_Measures.Freight at Rank",
+              "nativeQueryRef": "Freight",
+              "displayName": "Freight"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Freight Ratio at Rank"
+                }
+              },
+              "queryRef": "_Measures.Freight Ratio at Rank",
+              "nativeQueryRef": "Freight Ratio",
+              "displayName": "Freight Ratio"
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "sup_rank"
+                  }
+                },
+                "Property": "RankLabel"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
       }
     },
     "objects": {
@@ -151,6 +198,20 @@
           "selector": {
             "metadata": "_Measures.Revenue at Rank"
           }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "104.45284868993278D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_Measures.Freight at Rank"
+          }
         }
       ],
       "grid": [
@@ -186,7 +247,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Top 10 Categories by Total Revenue (EUR)'"
+                  "Value": "'Top 10 Categories by Total Revenue (EUR), Freight (EUR) and Freight rate'"
                 }
               }
             },

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "38f3eb79e27e1888ac90",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 5000,
+    "height": 720,
+    "width": 137.5,
+    "tabOrder": 6000
+  },
+  "visualGroup": {
+    "displayName": "fe_date",
+    "groupMode": "ScaleMode"
+  },
+  "isHidden": true
+}

@@ -1,0 +1,7 @@
+// Welcome to DAX query view! Learn more about DAX queries at https://aka.ms/dax-queries.
+// Right-click on tables, columns, or measures in the data pane to access quick queries, or ask Copilot for help writing DAX.
+EVALUATE
+SUMMARIZECOLUMNS(
+    "Con TREATAS", CALCULATE(COUNTROWS('gold fct_orders'), 'gold fct_orders'[Delivery Bucket] = "Not Delivered", TREATAS(VALUES('gold fct_order_items'[order_id]), 'gold fct_orders'[order_id])),
+    "De esos, status=delivered", CALCULATE(COUNTROWS('gold fct_orders'), 'gold fct_orders'[Delivery Bucket] = "Not Delivered", 'gold fct_orders'[order_status] = "delivered", TREATAS(VALUES('gold fct_order_items'[order_id]), 'gold fct_orders'[order_id]))
+)

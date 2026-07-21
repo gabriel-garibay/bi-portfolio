@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "797ab2be9df80d06f807",
+  "name": "c8715b8a720cc3abe0ee",
   "position": {
-    "x": 21.25,
-    "y": 92.5,
+    "x": 10,
+    "y": 159.30410122164048,
     "z": 1000,
-    "height": 107.5,
-    "width": 95,
-    "tabOrder": 0
+    "height": 259.65314136125653,
+    "width": 118.75,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "advancedSlicerVisual",
@@ -20,40 +20,17 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dim_date"
+                      "Entity": "gold fct_order_items"
                     }
                   },
-                  "Property": "Year"
+                  "Property": "order_status"
                 }
               },
-              "queryRef": "dim_date.Year",
-              "nativeQueryRef": "Sum of Year"
+              "queryRef": "gold fct_order_items.order_status",
+              "nativeQueryRef": "First order_status"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Aggregation": {
-                "Expression": {
-                  "Column": {
-                    "Expression": {
-                      "SourceRef": {
-                        "Entity": "dim_date"
-                      }
-                    },
-                    "Property": "Year"
-                  }
-                },
-                "Function": 0
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "objects": {
@@ -70,8 +47,8 @@
                 "Version": 2,
                 "From": [
                   {
-                    "Name": "d",
-                    "Entity": "dim_date",
+                    "Name": "g",
+                    "Entity": "gold fct_order_items",
                     "Type": 0
                   }
                 ],
@@ -84,10 +61,10 @@
                             "Column": {
                               "Expression": {
                                 "SourceRef": {
-                                  "Source": "d"
+                                  "Source": "g"
                                 }
                               },
-                              "Property": "Year"
+                              "Property": "order_status"
                             }
                           }
                         ],
@@ -95,14 +72,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "2018L"
-                              }
-                            }
-                          ],
-                          [
-                            {
-                              "Literal": {
-                                "Value": "2017L"
+                                "Value": "'delivered'"
                               }
                             }
                           ]
@@ -137,6 +107,13 @@
               "expr": {
                 "Literal": {
                   "Value": "5L"
+                }
+              }
+            },
+            "rowCount": {
+              "expr": {
+                "Literal": {
+                  "Value": "7L"
                 }
               }
             }
@@ -235,13 +212,6 @@
                   "Value": "false"
                 }
               }
-            },
-            "selectAllCheckboxEnabled": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
             }
           }
         }
@@ -281,19 +251,14 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'DATE'"
+                  "Value": "'STATUS'"
                 }
               }
             },
-            "fontColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 9,
-                      "Percent": -0.5
-                    }
-                  }
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
                 }
               }
             },
@@ -311,10 +276,15 @@
                 }
               }
             },
-            "alignment": {
-              "expr": {
-                "Literal": {
-                  "Value": "'center'"
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 9,
+                      "Percent": -0.5
+                    }
+                  }
                 }
               }
             }
@@ -337,5 +307,5 @@
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "38f3eb79e27e1888ac90"
+  "parentGroupName": "a420746ae450a4542411"
 }

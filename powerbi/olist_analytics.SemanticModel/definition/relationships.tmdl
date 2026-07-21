@@ -22,3 +22,8 @@ relationship 5511b431-95b1-6a5d-4b4a-6aa6d21476e6
 	fromColumn: 'gold fct_orders'.Date
 	toColumn: dim_date.Date
 
+relationship 9e5f318f-11c3-a5b1-ca51-729123e3c320
+	isActive: false
+	fromColumn: 'gold fct_order_items'.order_id
+	toColumn: 'gold fct_orders'.order_id
+

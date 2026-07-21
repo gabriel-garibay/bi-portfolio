@@ -10,12 +10,26 @@ A production-inspired, end-to-end data platform built to replicate modern Analyt
 
 * [x] **Phase 1: Local Ingestion Architecture** — Python raw ingestion + API boundary calls + PostgreSQL.
 * [x] **Phase 2: Modern Ingestion & Medallion** — FastAPI microservice replacing CSV extraction; full dbt Core staging, intermediate, and marts models (star schema in `gold`).
-* [ ] **Phase 3: Semantic BI Layer** — Power BI Star Schema with advanced DAX time-intelligence measures for sales, logistics, and currency-conversion analysis.
+* [x] **Phase 3: Semantic BI Layer** — Power BI Star Schema with advanced DAX (dynamic Top N segmentation, cross-fact filter propagation, geographic disambiguation) for sales, logistics, and payment-behavior analysis.
 
 ---
 
-## Power BI Dashboard (in progress)
-Exploratory analytics dashboard consuming the gold schema (`powerbi/`). Detailed documentation (visuals, DAX measures, modeling decisions) pending until the first stable version is closed.
+## Power BI Dashboard
+
+![Dashboard demo](images/olist_animation.gif)
+
+Interactive analytics dashboard consuming the `gold` schema directly — no transformation logic added at the BI layer itself; every field is either sourced as-is or derived via documented dbt logic upstream. Delivered as a `.pbip` project (TMDL + JSON, not a binary `.pbix`) for full version control and reviewable DAX diffs — see [`/powerbi`](./powerbi).
+
+**Visuals:**
+- KPI summary — Total Revenue, Order Count, Avg Order Value
+- Revenue trend over time (Year / Month)
+- Delivery delay vs. review score vs. order volume (combo chart: bucketed delay on the axis, review score as columns, order count as a line — volume is shown alongside the score so a bucket's rating can be read against its underlying sample size)
+- Dynamic Top 10 + Others revenue and freight ratio by product category (matrix)
+- Brazil states choropleth — revenue by customer state (Shape Map)
+- Payment method breakdown (grouped: Credit Card / Debit / Mixed Payment / Not Defined)
+- Collapsible filter panel (bookmark-driven show/hide) — Year, Quarter, Order Status, Payment Type
+
+Notable modeling and DAX decisions behind these visuals are documented in [Key Design Decisions §8](#8-power-bi-semantic-layer).
 
 ---
 
@@ -24,7 +38,7 @@ Exploratory analytics dashboard consuming the gold schema (`powerbi/`). Detailed
 * **[Layer 1: Bronze]** → PostgreSQL Target (Immutable Raw TEXT Mirror)
 * **[Layer 2: Silver]** → dbt Core Staging + Intermediate (Type Casting, Cleansing, Deduplication, Business Logic)
 * **[Layer 3: Gold]** → dbt Core Marts (Star Schema: Facts & Dimensions)
-* **[BI Layer]** → Power BI (Star Schema / Advanced DAX Time Intelligence) — *in progress*
+* **[BI Layer]** → Power BI (Star Schema / Advanced DAX Time Intelligence)
 
 ---
 
@@ -32,7 +46,7 @@ Exploratory analytics dashboard consuming the gold schema (`powerbi/`). Detailed
 * **Orchestration & Ingestion:** Python (`psycopg2`, `requests`), **FastAPI**
 * **Transformation & Modeling:** dbt Core 1.12, `dbt_utils`
 * **Storage & Compute:** PostgreSQL 16+
-* **Visualization & Analytics:** Power BI (Star Schema / Advanced DAX) — *upcoming*
+* **Visualization & Analytics:** Power BI (Star Schema / Advanced DAX)
 * **Version Control:** Git & GitHub
 
 ---
@@ -44,6 +58,7 @@ Exploratory analytics dashboard consuming the gold schema (`powerbi/`). Detailed
 | `/scripts` | Python ingestion pipeline — see table below |
 | `/api` | FastAPI service exposing source data as paginated endpoints |
 | `/olist_analytics` | dbt Core project (silver + gold layers) — see its [README](./olist_analytics/README.md) for model-level detail |
+| `/powerbi` | Power BI semantic model + report, as a `.pbip` project (TMDL + JSON) |
 | `/reports` | Sequential exploration & design-decision reports per layer (see below) |
 
 ### Ingestion Pipeline Scripts (`/scripts`)
@@ -96,3 +111,10 @@ The Frankfurter API request range is computed dynamically from `bronze.orders` (
 
 ### 7. ML-Based Category Imputation: Tested, Not Adopted
 A RandomForest diagnostic tested whether physical product dimensions predict missing `product_category_name`. Result: 33.7% accuracy across 71 categories — well above baseline, but too low to trust over an explicit `NULL`. Full method and results in [`ml_category_diagnostic.md`](./reports/ml_category_diagnostic.md).
+
+### 8. Power BI Semantic Layer
+
+* **Cross-fact filtering without a shared relationship.** `fct_orders` and `fct_order_items` intentionally carry no active relationship. Measures needing a filter to cross from `fct_order_items` into `fct_orders` (e.g., `Avg Review Score` reacting to a category slicer) use `TREATAS(VALUES('gold fct_order_items'[order_id]), 'gold fct_orders'[order_id])`.
+  * A side effect: ~775 orders (0.78%) have no matching row in `fct_order_items` and are excluded from `Avg Review Score` even with no category filter applied. Measured impact: those orphaned orders average **1.72/5** vs. **4.10/5** for the rest, but because they're such a small share of the total, the true blended average is **4.086** vs. the **4.105** currently shown — a 0.019-point gap. Judged not worth the added complexity of a conditional (`ISCROSSFILTERED`) branch; documented here instead of silently left unexplained.
+* **Dynamic Top N + Others without a calculated column.** Chart and matrix axes require a materialized column, not a measure, so grouping the real dimension column can't react to slicers. Solved with a disconnected rank-slot scaffold table (`sup_rank`) and measures that re-resolve which real category occupies each rank live, per filter context — reused for both revenue and freight ratio in the same matrix, validated by reconstructing each metric's total exactly from the sum of all ranked slots, including "Others".
+* **Payment method grouping.** `payment_type` is collapsed into four buckets — Credit Card, Debit (debit card, voucher, and boleto), Mixed Payment (orders combining methods), and Not Defined — to keep the breakdown visual readable rather than fragmenting it across every raw value and method combination.

@@ -320,6 +320,12 @@ table 'gold fct_order_items'
 
 		annotation UnderlyingDateTimeDataType = Date
 
+	column payment_type = LOOKUPVALUE('gold fct_orders'[payment_method],'gold fct_orders'[order_id],'gold fct_order_items'[order_id])
+		lineageTag: 50b1e4ea-043f-41a2-87bd-639c9a1c6ef6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'gold fct_order_items' = m
 		mode: import
 		source =

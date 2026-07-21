@@ -119,6 +119,12 @@ table dim_date
 
 		annotation SummarizationSetBy = Automatic
 
+	column QuarterN = "Q"&dim_date[Quarter]
+		lineageTag: 43cef867-9111-4e96-bc8b-1d159ef18b9f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition dim_date = m
 		mode: import
 		source =

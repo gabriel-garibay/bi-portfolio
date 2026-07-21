@@ -55,6 +55,22 @@
           "type": "BaseTheme"
         }
       ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "calendario00023688451481618245.png",
+          "path": "calendario00023688451481618245.png",
+          "type": "Image"
+        },
+        {
+          "name": "filtrar3007597483919948.png",
+          "path": "filtrar3007597483919948.png",
+          "type": "Image"
+        }
+      ]
     }
   ],
   "settings": {

@@ -236,16 +236,27 @@ table 'gold fct_orders'
 
 		annotation SummarizationSetBy = Automatic
 
+	column payment_method =
+			
+			SWITCH(
+			    TRUE(),
+			    'gold fct_orders'[payment_types] = "credit_card", "Credit Card",
+			    'gold fct_orders'[payment_types] IN {"debit_card", "voucher","boleto"}, "Debit",
+			    ISBLANK('gold fct_orders'[payment_types]) || 'gold fct_orders'[payment_types] = "not_defined", "Not Defined",
+			    "Mixed Payment"
+			)
+		lineageTag: fed0c8f5-bd36-40d8-b2a1-3fd30d16da59
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'gold fct_orders' = m
 		mode: import
 		source =
 				let
 				    Source = PostgreSQL.Database("localhost:5432", "de_portfolio"),
 				    gold_fct_orders = Source{[Schema="gold",Item="fct_orders"]}[Data],
-				    #"Duplicated Column" = Table.DuplicateColumn(gold_fct_orders, "order_purchase_timestamp", "order_purchase_onlydate"),
-				    #"Inserted Date" = Table.AddColumn(#"Duplicated Column", "Date", each DateTime.Date([order_purchase_onlydate]), type date),
-				    #"Removed Columns" = Table.RemoveColumns(#"Inserted Date",{"order_purchase_onlydate", "Date"}),
-				    #"Inserted Date1" = Table.AddColumn(#"Removed Columns", "Date", each DateTime.Date([order_purchase_timestamp]), type date)
+				    #"Inserted Date1" = Table.AddColumn(gold_fct_orders, "Date", each DateTime.Date([order_purchase_timestamp]), type date)
 				in
 				    #"Inserted Date1"
 

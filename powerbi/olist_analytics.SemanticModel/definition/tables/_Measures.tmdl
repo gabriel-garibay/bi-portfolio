@@ -10,7 +10,11 @@ table _Measures
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Order Count' = COUNTROWS('gold fct_orders')
+	measure 'Order Count' =
+			CALCULATE(
+			    COUNTROWS('gold fct_orders'),
+			    'gold fct_orders'[order_id] IN VALUES('gold fct_order_items'[order_id])
+			)
 		formatString: #,0
 		lineageTag: cbb4c22e-547d-448d-9e47-1c28e36ec92e
 
@@ -18,34 +22,15 @@ table _Measures
 		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
 		lineageTag: 876530f9-18f0-48de-89c1-e46348ee04db
 
-	measure 'Avg Review Score' = AVERAGE('gold fct_orders'[review_score])
+	measure 'Avg Review Score' =
+			
+			CALCULATE(
+			    AVERAGE('gold fct_orders'[review_score]),
+			    TREATAS(VALUES('gold fct_order_items'[order_id]), 'gold fct_orders'[order_id])
+			)
 		lineageTag: 5c12db5f-ef4f-486f-a21f-af5823350f98
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Revenue MoM %' =
-			VAR CurrentRevenue = [Total Revenue (EUR)]
-			VAR PreviousMonthRevenue =
-			    CALCULATE([Total Revenue (EUR)], DATEADD(dim_date[Date], -1, MONTH))
-			RETURN
-			    DIVIDE(CurrentRevenue - PreviousMonthRevenue, PreviousMonthRevenue)
-		lineageTag: 1420961b-b29e-4de3-8786-31115fa5f5bf
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Revenue YoY %' =
-			VAR CurrentRevenue = [Total Revenue (EUR)]
-			VAR PreviousYearRevenue =
-			    CALCULATE([Total Revenue (EUR)], SAMEPERIODLASTYEAR(dim_date[Date]))
-			RETURN
-			    DIVIDE(CurrentRevenue - PreviousYearRevenue, PreviousYearRevenue)
-		lineageTag: 95c2bcef-5fce-41ce-bf6f-6122fee1fe30
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	measure 'Seller Revenue Rank' = RANKX(ALLSELECTED('gold dim_sellers'), CALCULATE([Total Revenue (EUR)], REMOVEFILTERS('gold dim_products')), , DESC, DENSE)
-		formatString: 0
-		lineageTag: 73061a14-4d6a-40e7-a3a4-dc34173d931e
 
 	measure 'Revenue at Rank' =
 			
@@ -84,15 +69,56 @@ table _Measures
 			    IF(CurrentSlot = 11, "Otros", MAXX(FILTER(WithRank, [@Rank] = CurrentSlot), [product_category_name_english]))
 		lineageTag: d8167947-cee2-4a12-b455-d24b0d5cba4f
 
-	measure 'Revenue Share by State %' = DIVIDE([Total Revenue (EUR)], CALCULATE([Total Revenue (EUR)], ALL('gold dim_customers'[geo_state])))
+	measure 'Revenue Share by State %' = DIVIDE([Total Revenue (EUR)], CALCULATE([Total Revenue (EUR)], ALL('gold dim_customers'[geo_state_full])))
 		lineageTag: f8959e44-d481-4928-90f9-1c7c413481f9
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Avg Order Value by State (EUR)' = DIVIDE([Total Revenue (EUR)], DISTINCTCOUNT('gold fct_orders'[order_id]))
-		lineageTag: 972d812f-83ef-4acf-9a06-cf157dc9aa3a
+	measure 'Freight at Rank' =
+			
+			VAR CurrentSlot = SELECTEDVALUE('sup_rank'[RankSlot])
+			VAR RankedCategories =
+			    ADDCOLUMNS(
+			        ALLSELECTED('gold dim_products'[product_category_name_english]),
+			        "@Revenue", CALCULATE([Total Revenue (EUR)]),
+			        "@Freight", CALCULATE([Total Freight (EUR)])
+			    )
+			VAR WithRank =
+			    ADDCOLUMNS(RankedCategories, "@Rank", RANKX(RankedCategories, [@Revenue],, DESC))
+			RETURN
+			    IF(
+			        ISBLANK(CurrentSlot), [Total Freight (EUR)],
+			        IF(
+			            CurrentSlot = 11,
+			            SUMX(FILTER(WithRank, [@Rank] > 10), [@Freight]),
+			            SUMX(FILTER(WithRank, [@Rank] = CurrentSlot), [@Freight])
+			        )
+			    )
+		formatString: "€"\ #,0.00;-"€"\ #,0.00;"€"\ #,0.00
+		lineageTag: f380d046-ba03-4daf-9ac0-c4f65ca37a88
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+	measure 'Freight Ratio at Rank' =
+			
+			VAR CurrentSlot = SELECTEDVALUE('sup_rank'[RankSlot])
+			VAR RankedCategories =
+			    ADDCOLUMNS(
+			        ALLSELECTED('gold dim_products'[product_category_name_english]),
+			        "@Revenue", CALCULATE([Total Revenue (EUR)]),
+			        "@Freight", CALCULATE([Total Freight (EUR)])
+			    )
+			VAR WithRank =
+			    ADDCOLUMNS(RankedCategories, "@Rank", RANKX(RankedCategories, [@Revenue],, DESC))
+			RETURN
+			    IF(
+			        ISBLANK(CurrentSlot), DIVIDE([Total Freight (EUR)], [Total Revenue (EUR)]),
+			        IF(
+			            CurrentSlot = 11,
+			            DIVIDE(SUMX(FILTER(WithRank, [@Rank] > 10), [@Freight]), SUMX(FILTER(WithRank, [@Rank] > 10), [@Revenue])),
+			            DIVIDE(SUMX(FILTER(WithRank, [@Rank] = CurrentSlot), [@Freight]), SUMX(FILTER(WithRank, [@Rank] = CurrentSlot), [@Revenue]))
+			        )
+			    )
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: b0e1ad04-4be9-4499-9422-869286e82407
 
 	partition _Measures = m
 		mode: import

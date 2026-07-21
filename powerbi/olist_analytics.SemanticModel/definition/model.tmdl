@@ -10,7 +10,7 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_QueryOrder = ["gold dim_customers","gold dim_products","gold dim_sellers","gold fct_orders","gold fct_order_items","dim_date","_Measures","sup_rank"]
 
-annotation PBI_ProTooling = ["DevMode"]
+annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
 
 ref table 'gold dim_customers'
 ref table 'gold dim_products'

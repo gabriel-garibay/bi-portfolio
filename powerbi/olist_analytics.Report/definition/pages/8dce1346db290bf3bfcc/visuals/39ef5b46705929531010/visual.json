@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
-  "name": "6dc9b672f22e2f4fbfc8",
+  "name": "39ef5b46705929531010",
   "position": {
     "x": 0,
-    "y": 0,
+    "y": 0.29895329874122822,
     "z": 0,
-    "height": 720,
-    "width": 137.5,
-    "tabOrder": 1000
+    "height": 58.333333333333336,
+    "width": 54.166666666666671,
+    "tabOrder": 8000
   },
   "visual": {
     "visualType": "shape",
@@ -18,7 +18,7 @@
             "tileShape": {
               "expr": {
                 "Literal": {
-                  "Value": "'tabRoundTopCorners'"
+                  "Value": "'rectangleRounded'"
                 }
               }
             }
@@ -32,13 +32,6 @@
               "expr": {
                 "Literal": {
                   "Value": "0L"
-                }
-              }
-            },
-            "angle": {
-              "expr": {
-                "Literal": {
-                  "Value": "90D"
                 }
               }
             }
@@ -59,6 +52,13 @@
                   }
                 }
               }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
             }
           },
           "selector": {
@@ -69,27 +69,48 @@
       "outline": [
         {
           "properties": {
-            "lineColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": -0.6
-                    }
-                  }
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
-          },
-          "selector": {
-            "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "visualLink": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bookmark'"
+                }
+              }
+            },
+            "bookmark": {
+              "expr": {
+                "Literal": {
+                  "Value": "'699c7870c8ca52795657'"
+                }
+              }
+            }
           }
         }
       ]
     },
     "drillFilterOtherVisuals": true
   },
-  "parentGroupName": "38f3eb79e27e1888ac90",
+  "parentGroupName": "6c9531ce0848c28d77b0",
   "howCreated": "InsertVisualButton"
 }

@@ -72,7 +72,7 @@ table 'gold dim_sellers'
 	column geo_state_full =
 			
 			SWITCH(
-			    'gold dim_sellers'[geo_state],
+			    'gold dim_sellers'[seller_state],
 			    "AC", "Acre",
 			    "AL", "Alagoas",
 			    "AP", "Amapa",

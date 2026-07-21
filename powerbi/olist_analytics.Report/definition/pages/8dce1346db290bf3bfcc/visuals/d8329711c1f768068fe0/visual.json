@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "d8329711c1f768068fe0",
   "position": {
-    "x": 874.59353509086486,
-    "y": 188.4263954466669,
-    "z": 8000,
-    "height": 343.98286937901497,
-    "width": 323.42612419700214,
-    "tabOrder": 7001
+    "x": 789.573394571994,
+    "y": 11.0992273154707,
+    "z": 3000,
+    "height": 361.69327251995441,
+    "width": 316.65222348916762,
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "shapeMap",
@@ -191,7 +191,14 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Map by total Revenue (EUR)'"
                 }
               }
             }
@@ -217,7 +224,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             }
@@ -230,7 +237,7 @@
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             }

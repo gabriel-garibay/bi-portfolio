@@ -564,12 +564,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "state": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "customer location": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -610,46 +604,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "location": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "province": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "territory": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "nation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
 			          "customer condition": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -667,6 +621,46 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "client state": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "consumer state": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "user state": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "buyer state": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
 			          }
 			        }
 			      ]
@@ -888,12 +882,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "state": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "geo location": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -931,46 +919,6 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "location": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "province": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "territory": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "nation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
 			          }
 			        },
 			        {
@@ -2491,12 +2439,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "state": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "seller location": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -2534,46 +2476,6 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "location": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "province": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "territory": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "nation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
 			          }
 			        },
 			        {
@@ -2815,12 +2717,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "state": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "geo location": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -2858,46 +2754,6 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "location": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "province": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "territory": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "nation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
 			          }
 			        },
 			        {
@@ -4921,12 +4777,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "state": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "customer location": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -4967,46 +4817,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "location": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "province": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "territory": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "nation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
 			          "customer condition": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -5024,6 +4834,46 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "client state": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "consumer state": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "user state": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "buyer state": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
 			          }
 			        }
 			      ]
@@ -6587,16 +6437,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "ratio": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.491
-			          }
-			        },
-			        {
 			          "quotient": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -6664,6 +6504,16 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "pace": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
 			          }
 			        }
 			      ]
@@ -7433,12 +7283,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "state": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "seller location": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -7476,46 +7320,6 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.75
-			          }
-			        },
-			        {
-			          "location": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "province": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "territory": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "nation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
 			          }
 			        },
 			        {
@@ -8039,12 +7843,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "state": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
 			          "customer location": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -8085,46 +7883,6 @@ cultureInfo en-US
 			          }
 			        },
 			        {
-			          "location": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "province": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "territory": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
-			          "nation": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.736
-			          }
-			        },
-			        {
 			          "customer condition": {
 			            "Type": "Noun",
 			            "State": "Suggested",
@@ -8142,6 +7900,46 @@ cultureInfo en-US
 			              "Agent": "Thesaurus"
 			            },
 			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "client state": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "consumer state": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "user state": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "buyer state": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
 			          }
 			        }
 			      ]
@@ -9389,108 +9187,6 @@ cultureInfo en-US
 			        }
 			      ]
 			    },
-			    "entity__measure.seller_revenue_rank": {
-			      "Definition": {
-			        "Binding": {
-			          "ConceptualEntity": "_Measures",
-			          "ConceptualProperty": "Seller Revenue Rank"
-			        }
-			      },
-			      "State": "Generated",
-			      "Terms": [
-			        {
-			          "seller revenue rank": {
-			            "State": "Generated"
-			          }
-			        },
-			        {
-			          "revenue rank": {
-			            "State": "Generated",
-			            "Weight": 0.97
-			          }
-			        },
-			        {
-			          "seller income rank": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.609
-			          }
-			        },
-			        {
-			          "income rank": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.6
-			          }
-			        },
-			        {
-			          "seller profit rank": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.591
-			          }
-			        },
-			        {
-			          "seller turnover rank": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.591
-			          }
-			        },
-			        {
-			          "seller yield rank": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.591
-			          }
-			        },
-			        {
-			          "profit rank": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.582
-			          }
-			        },
-			        {
-			          "turnover rank": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.582
-			          }
-			        },
-			        {
-			          "yield rank": {
-			            "Type": "Noun",
-			            "State": "Suggested",
-			            "Source": {
-			              "Agent": "Thesaurus"
-			            },
-			            "Weight": 0.582
-			          }
-			        }
-			      ]
-			    },
 			    "entity__measure.revenue_at_rank": {
 			      "Definition": {
 			        "Binding": {
@@ -10629,9 +10325,784 @@ cultureInfo en-US
 			          }
 			        }
 			      ]
+			    },
+			    "gold_fct_order.payment_method": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "gold fct_orders",
+			          "ConceptualProperty": "payment_method"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "payment method": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "payment_method": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "method": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "payment technique": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "payment system": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "payment manner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "payment mode": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "technique": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "system": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "manner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "mode": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "payment way": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "payment process": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        }
+			      ]
+			    },
+			    "entity__measure.freight_at_rank": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "Freight at Rank"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "freight at rank": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "freight": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "cargo at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "consignment at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "merchandise at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "load at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "cargo": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "consignment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "carriage at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "conveyance at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "transportation at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "shipment at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        }
+			      ]
+			    },
+			    "entity__measure.freight_ratio_at_rank": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Measures",
+			          "ConceptualProperty": "Freight Ratio at Rank"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "freight ratio at rank": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "ratio": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "freight ratio": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "freight relation at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "freight percentage at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "freight quotient at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "freight relationship at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "freight relation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "freight percentage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "freight quotient": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "freight relationship": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "freight proportion at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "freight share at rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
+			    "entity__measure_has_freight_ratio_at_rank": {
+			      "Binding": {
+			        "ConceptualEntity": "_Measures"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "entity__measure": {
+			          "Target": {
+			            "Entity": "entity__measure"
+			          }
+			        },
+			        "entity__measure.freight_ratio_at_rank": {
+			          "Target": {
+			            "Entity": "entity__measure.freight_ratio_at_rank"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "entity__measure"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.freight_ratio_at_rank"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "Phrasing_measures_have_freight_ratio_at_rank"
+			        }
+			      ]
+			    },
+			    "entity__measure_has_freight_at_rank": {
+			      "Binding": {
+			        "ConceptualEntity": "_Measures"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "entity__measure": {
+			          "Target": {
+			            "Entity": "entity__measure"
+			          }
+			        },
+			        "entity__measure.freight_at_rank": {
+			          "Target": {
+			            "Entity": "entity__measure.freight_at_rank"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "entity__measure"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.freight_at_rank"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "Phrasing_measures_have_freight_at_rank"
+			        }
+			      ]
+			    },
+			    "gold_fct_order_has_entity__measure_order_funnel_value": {
+			      "Binding": {
+			        "ConceptualEntity": "gold fct_orders"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "gold_fct_order": {
+			          "Target": {
+			            "Entity": "gold_fct_order"
+			          }
+			        },
+			        "entity__measure.order_funnel_value": {
+			          "Target": {
+			            "Entity": "entity__measure.order_funnel_value"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "gold_fct_order"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.order_funnel_value"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "gold_fct_orders_have_order_funnel_value"
+			        }
+			      ]
+			    },
+			    "gold_fct_order_has_payment_method": {
+			      "Binding": {
+			        "ConceptualEntity": "gold fct_orders"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "gold_fct_order": {
+			          "Target": {
+			            "Entity": "gold_fct_order"
+			          }
+			        },
+			        "gold_fct_order.payment_method": {
+			          "Target": {
+			            "Entity": "gold_fct_order.payment_method"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "gold_fct_order"
+			            },
+			            "Object": {
+			              "Role": "gold_fct_order.payment_method"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "gold_fct_orders_have_payment_methods"
+			        }
+			      ]
+			    },
+			    "gold_fct_order_has_entity__measure_avg_order_value_by_state_EUR": {
+			      "Binding": {
+			        "ConceptualEntity": "gold fct_orders"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "gold_fct_order": {
+			          "Target": {
+			            "Entity": "gold_fct_order"
+			          }
+			        },
+			        "entity__measure.avg_order_value_by_state_EUR": {
+			          "Target": {
+			            "Entity": "entity__measure.avg_order_value_by_state_EUR"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "gold_fct_order"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.avg_order_value_by_state_EUR"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "gold_fct_orders_have_avg_order_value_by_state_EUR"
+			        }
+			      ]
+			    },
+			    "gold_fct_order_item_has_entity__measure_avg_order_value_by_state_EUR": {
+			      "Binding": {
+			        "ConceptualEntity": "gold fct_order_items"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "gold_fct_order_item": {
+			          "Target": {
+			            "Entity": "gold_fct_order_item"
+			          }
+			        },
+			        "entity__measure.avg_order_value_by_state_EUR": {
+			          "Target": {
+			            "Entity": "entity__measure.avg_order_value_by_state_EUR"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "gold_fct_order_item"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.avg_order_value_by_state_EUR"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "gold_fct_order_items_have_avg_order_value_by_state_EUR"
+			        }
+			      ]
+			    },
+			    "gold_fct_order_item_has_entity__measure_revenue_share_by_state_": {
+			      "Binding": {
+			        "ConceptualEntity": "gold fct_order_items"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "gold_fct_order_item": {
+			          "Target": {
+			            "Entity": "gold_fct_order_item"
+			          }
+			        },
+			        "entity__measure.revenue_share_by_state_": {
+			          "Target": {
+			            "Entity": "entity__measure.revenue_share_by_state_"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "gold_fct_order_item"
+			            },
+			            "Object": {
+			              "Role": "entity__measure.revenue_share_by_state_"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "gold_fct_order_items_have_revenue_share_by_state_"
+			        }
+			      ]
+			    },
+			    "gold_fct_order_has_delivery_bucket_order": {
+			      "Binding": {
+			        "ConceptualEntity": "gold fct_orders"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "gold_fct_order": {
+			          "Target": {
+			            "Entity": "gold_fct_order"
+			          }
+			        },
+			        "gold_fct_order.delivery_bucket_order": {
+			          "Target": {
+			            "Entity": "gold_fct_order.delivery_bucket_order"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "gold_fct_order"
+			            },
+			            "Object": {
+			              "Role": "gold_fct_order.delivery_bucket_order"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "gold_fct_orders_have_delivery_bucket_orders"
+			        }
+			      ]
+			    },
+			    "gold_fct_order_has_delivery_bucket": {
+			      "Binding": {
+			        "ConceptualEntity": "gold fct_orders"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "gold_fct_order": {
+			          "Target": {
+			            "Entity": "gold_fct_order"
+			          }
+			        },
+			        "gold_fct_order.delivery_bucket": {
+			          "Target": {
+			            "Entity": "gold_fct_order.delivery_bucket"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "gold_fct_order"
+			            },
+			            "Object": {
+			              "Role": "gold_fct_order.delivery_bucket"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "gold_fct_orders_have_delivery_buckets"
+			        }
+			      ]
+			    },
+			    "gold_fct_order_has_delivery_delay": {
+			      "Binding": {
+			        "ConceptualEntity": "gold fct_orders"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "gold_fct_order": {
+			          "Target": {
+			            "Entity": "gold_fct_order"
+			          }
+			        },
+			        "gold_fct_order.delivery_delay": {
+			          "Target": {
+			            "Entity": "gold_fct_order.delivery_delay"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "gold_fct_order"
+			            },
+			            "Object": {
+			              "Role": "gold_fct_order.delivery_delay"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "gold_fct_orders_have_delivery_delays"
+			        }
+			      ]
+			    },
+			    "gold_dim_seller_has_geo_state_full": {
+			      "Binding": {
+			        "ConceptualEntity": "gold dim_sellers"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "gold_dim_seller": {
+			          "Target": {
+			            "Entity": "gold_dim_seller"
+			          }
+			        },
+			        "gold_dim_seller.geo_state_full": {
+			          "Target": {
+			            "Entity": "gold_dim_seller.geo_state_full"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "gold_dim_seller"
+			            },
+			            "Object": {
+			              "Role": "gold_dim_seller.geo_state_full"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "gold_dim_sellers_have_geo_state_full"
+			        }
+			      ]
+			    },
+			    "gold_dim_customer_has_geo_state_full": {
+			      "Binding": {
+			        "ConceptualEntity": "gold dim_customers"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "gold_dim_customer": {
+			          "Target": {
+			            "Entity": "gold_dim_customer"
+			          }
+			        },
+			        "gold_dim_customer.geo_state_full": {
+			          "Target": {
+			            "Entity": "gold_dim_customer.geo_state_full"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "gold_dim_customer"
+			            },
+			            "Object": {
+			              "Role": "gold_dim_customer.geo_state_full"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "gold_dim_customers_have_geo_state_full"
+			        }
+			      ]
+			    },
 			    "sup_rank_has_rank_label": {
 			      "Binding": {
 			        "ConceptualEntity": "sup_rank"
@@ -10761,39 +11232,6 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "Phrasing_measures_have_revenue_at_rank"
-			        }
-			      ]
-			    },
-			    "entity__measure_has_seller_revenue_rank": {
-			      "Binding": {
-			        "ConceptualEntity": "_Measures"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "entity__measure": {
-			          "Target": {
-			            "Entity": "entity__measure"
-			          }
-			        },
-			        "entity__measure.seller_revenue_rank": {
-			          "Target": {
-			            "Entity": "entity__measure.seller_revenue_rank"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "entity__measure"
-			            },
-			            "Object": {
-			              "Role": "entity__measure.seller_revenue_rank"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "Phrasing_measures_have_seller_revenue_rank"
 			        }
 			      ]
 			    },
@@ -14539,270 +14977,6 @@ cultureInfo en-US
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "gold_dim_sellers_have_gold_fct_order_items"
-			        }
-			      ]
-			    },
-			    "gold_dim_customer_has_geo_state_full": {
-			      "Binding": {
-			        "ConceptualEntity": "gold dim_customers"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "gold_dim_customer": {
-			          "Target": {
-			            "Entity": "gold_dim_customer"
-			          }
-			        },
-			        "gold_dim_customer.geo_state_full": {
-			          "Target": {
-			            "Entity": "gold_dim_customer.geo_state_full"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "gold_dim_customer"
-			            },
-			            "Object": {
-			              "Role": "gold_dim_customer.geo_state_full"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "gold_dim_customers_have_geo_state_full"
-			        }
-			      ]
-			    },
-			    "gold_dim_seller_has_geo_state_full": {
-			      "Binding": {
-			        "ConceptualEntity": "gold dim_sellers"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "gold_dim_seller": {
-			          "Target": {
-			            "Entity": "gold_dim_seller"
-			          }
-			        },
-			        "gold_dim_seller.geo_state_full": {
-			          "Target": {
-			            "Entity": "gold_dim_seller.geo_state_full"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "gold_dim_seller"
-			            },
-			            "Object": {
-			              "Role": "gold_dim_seller.geo_state_full"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "gold_dim_sellers_have_geo_state_full"
-			        }
-			      ]
-			    },
-			    "gold_fct_order_has_delivery_delay": {
-			      "Binding": {
-			        "ConceptualEntity": "gold fct_orders"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "gold_fct_order": {
-			          "Target": {
-			            "Entity": "gold_fct_order"
-			          }
-			        },
-			        "gold_fct_order.delivery_delay": {
-			          "Target": {
-			            "Entity": "gold_fct_order.delivery_delay"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "gold_fct_order"
-			            },
-			            "Object": {
-			              "Role": "gold_fct_order.delivery_delay"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "gold_fct_orders_have_delivery_delays"
-			        }
-			      ]
-			    },
-			    "gold_fct_order_has_delivery_bucket": {
-			      "Binding": {
-			        "ConceptualEntity": "gold fct_orders"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "gold_fct_order": {
-			          "Target": {
-			            "Entity": "gold_fct_order"
-			          }
-			        },
-			        "gold_fct_order.delivery_bucket": {
-			          "Target": {
-			            "Entity": "gold_fct_order.delivery_bucket"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "gold_fct_order"
-			            },
-			            "Object": {
-			              "Role": "gold_fct_order.delivery_bucket"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "gold_fct_orders_have_delivery_buckets"
-			        }
-			      ]
-			    },
-			    "gold_fct_order_has_delivery_bucket_order": {
-			      "Binding": {
-			        "ConceptualEntity": "gold fct_orders"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "gold_fct_order": {
-			          "Target": {
-			            "Entity": "gold_fct_order"
-			          }
-			        },
-			        "gold_fct_order.delivery_bucket_order": {
-			          "Target": {
-			            "Entity": "gold_fct_order.delivery_bucket_order"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "gold_fct_order"
-			            },
-			            "Object": {
-			              "Role": "gold_fct_order.delivery_bucket_order"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "gold_fct_orders_have_delivery_bucket_orders"
-			        }
-			      ]
-			    },
-			    "gold_fct_order_item_has_entity__measure_revenue_share_by_state_": {
-			      "Binding": {
-			        "ConceptualEntity": "gold fct_order_items"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "gold_fct_order_item": {
-			          "Target": {
-			            "Entity": "gold_fct_order_item"
-			          }
-			        },
-			        "entity__measure.revenue_share_by_state_": {
-			          "Target": {
-			            "Entity": "entity__measure.revenue_share_by_state_"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "gold_fct_order_item"
-			            },
-			            "Object": {
-			              "Role": "entity__measure.revenue_share_by_state_"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "gold_fct_order_items_have_revenue_share_by_state_"
-			        }
-			      ]
-			    },
-			    "gold_fct_order_item_has_entity__measure_avg_order_value_by_state_EUR": {
-			      "Binding": {
-			        "ConceptualEntity": "gold fct_order_items"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "gold_fct_order_item": {
-			          "Target": {
-			            "Entity": "gold_fct_order_item"
-			          }
-			        },
-			        "entity__measure.avg_order_value_by_state_EUR": {
-			          "Target": {
-			            "Entity": "entity__measure.avg_order_value_by_state_EUR"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "gold_fct_order_item"
-			            },
-			            "Object": {
-			              "Role": "entity__measure.avg_order_value_by_state_EUR"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "gold_fct_order_items_have_avg_order_value_by_state_EUR"
-			        }
-			      ]
-			    },
-			    "gold_fct_order_has_entity__measure_avg_order_value_by_state_EUR": {
-			      "Binding": {
-			        "ConceptualEntity": "gold fct_orders"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "gold_fct_order": {
-			          "Target": {
-			            "Entity": "gold_fct_order"
-			          }
-			        },
-			        "entity__measure.avg_order_value_by_state_EUR": {
-			          "Target": {
-			            "Entity": "entity__measure.avg_order_value_by_state_EUR"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "gold_fct_order"
-			            },
-			            "Object": {
-			              "Role": "entity__measure.avg_order_value_by_state_EUR"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "gold_fct_orders_have_avg_order_value_by_state_EUR"
 			        }
 			      ]
 			    },
